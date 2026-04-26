@@ -1,63 +1,50 @@
 @import url(base.css);
 
-h1 {
-  font-size: 200%;
-  margin: 8px 0px;
-}
-
-/* Constrain the page to the viewport */
 html, body {
   height: 100vh;
-}
-
-/* Center the nav's header and list */
-nav {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-/* navigation buttons have full width */
-nav button {
-  width: 100%;
-}
-
-/* Remove unnecessary space and bullets from the lists */
-ul {
-  padding: 0px;
-  margin: 16px;
-  list-style-type: none;
+  padding: 0;
+  margin: 0;
 }
 
 /* Task 2.1. Lay out the childs of the 'body' using Grid Template Areas. */
-
-
-/* Task 3.1. Make the header element a flex container and center its children
-   vertically and horizontally.
- */
-
-
-/* Task 3.2. Make the list items of the unordered list in the nav element a flex container, 
-   use column direction and center the child items
- */
-
-/* Task 3.3. Make the main element a Flexbox container */
-
-
-/* Task 3.4. Make the footer's ul a Flexbox container */
-
-
-/* From here on styling from exercise 1 */
-img {
-  border-radius: 12px;
+body {
+  display: grid;
+  grid-template-columns: minmax(192px, 256px) 1fr;
+  grid-template-rows: minmax(64px, 128px) 1fr minmax(64px, 128px);
+  grid-template-areas:
+    "h h"
+    "n m"
+    "f f";
+  min-height: 100vh;
 }
 
-article {
-  background-color: lightgray;
-  border-radius: 16px;
-  padding: 16px;
-  width: 384px;
-  margin: 8px;
+
+@media (max-width: 768px) {
+  body {
+    grid-template-columns: 1fr;
+    grid-template-rows: minmax(64px, 128px) auto 1fr minmax(64px, 128px);
+    grid-template-areas:
+      "h"
+      "n"
+      "m"
+      "f";
+  }
+  .movie-container {
+    width: calc(100% - 32px); /* Takes full width minus the 16px margins */
+    margin: 16px auto;        /* Smaller margins for mobile screens */
+    padding: 16px;
+  }
+  #movie-top {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+}
+
+
+h1 {
+  font-size: 200%;
+  margin: 8px 0px;
 }
 
 a {
@@ -68,10 +55,196 @@ span {
   margin-right: 4px;
 }
 
+img {
+  border-radius: 5px;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+}
+
+
+ul {
+  padding: 0px;
+  margin: 16px;
+  list-style-type: none;
+  display: flex;
+}
+
+/* Task 3.1. Make the header element a flex container and center its children vertically and horizontally. */
+body > header {
+  grid-area: h;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  background-image: url('images/header-background.jpg');
+
+}
+
+nav {
+  grid-area: n;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+nav button {
+  width: 100%;
+}
+
+/* Task 3.2. Make the list items of the unordered list in the nav element a flex container, use column direction and center the child items */
+nav ul {
+  flex-direction: column;
+  gap: 8px;
+}
+
+main {
+  grid-area: m;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: stretch;
+}
+
+footer {
+  grid-area: f;
+  background-color: #811e1e;
+}
+
+/* Task 3.3. Make the main element a Flexbox container */
+/* Task 3.4. Make the footer's ul a Flexbox container */
+main ul li {
+
+}
+
+article {
+  background-color: lightgray;
+  border-radius: 16px;
+  padding: 16px;
+  max-width: 384px;
+  margin: 8px;
+}
+
 .genre {
   padding: 4px 8px;
   border: solid black 1px;
   border-radius: 6px;
   background-color: darkgray;
   font-weight: bold;
+}
+
+.movie-container {
+  border: darkgray solid 1px;
+  border-radius: 10px;
+  margin: 20px;
+  padding: 20px;
+  max-width: 700px;
+  width: 80%;
+  color: #000000;
+}
+
+#movie-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.movie-basic-info h1 {
+  margin: 0;
+}
+
+.movie-facts {
+  margin: 0;
+  padding: 0;
+}
+
+.movie-facts li {
+  display: inline;
+}
+
+.movie-facts li:after {
+  content: " —";
+}
+
+.movie-facts li:last-child:after {
+  content: none;
+}
+
+.comma-joined-list li {
+  display: inline-block;
+}
+
+.comma-joined-list li:after {
+  content: ", ";
+  margin-right: 5px;
+}
+
+.comma-joined-list li:last-child:after {
+  content: none;
+}
+
+.section {
+  display: flex;
+  justify-content: left;
+}
+
+.movie-ratings {
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+
+.movie-ratings td {
+  text-align: center;
+  padding-left: 20px;
+}
+
+.movie-ratings tr:first-child {
+  color: #555555;
+}
+
+.movie-ratings tr:last-child {
+  font-weight: bold;
+}
+
+.tiled-list {
+  padding: 0;
+}
+
+.tiled-list li {
+  display: inline-block;
+  border: #0E0E0E solid 1px;
+  background-color: #9F9F9F;
+  border-radius: 20px;
+  padding-block: 2px;
+  padding-inline: 12px;
+  margin-inline: 2px;
+}
+
+
+footer ul {
+  display: flex;
+  justify-content: center;
+}
+
+footer li::after {
+  content: " — ";
+  white-space: pre;
+}
+
+footer li:last-child::after {
+  content: none;
+}
+
+footer a {
+  text-decoration: none;
+  color: inherit;
+}
+
+footer a:hover {
+  text-decoration: underline;
+  color: #ffaa00;
 }
